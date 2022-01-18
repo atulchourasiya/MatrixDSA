@@ -1,0 +1,39 @@
+class Solution{
+public:
+int count_1(vector<int> arr, int size)
+{
+    int low = 0, high = size - 1;
+    int count = 0;
+    while (low <= high)
+    {
+        int mid = (low + high) / 2;
+        if (arr[mid] == 0)
+        {
+            low = mid + 1;
+        }
+        if (arr[mid] == 1)
+        {
+            count = count + (high + 1) - mid;
+            high = mid - 1;
+        }
+    }
+    return count;
+}
+int rowWithMax1s(vector<vector<int>> arr, int n, int m)
+{
+    int max = 0;
+    int count=0;
+    int returnval = -1;
+    for (int i = 0; i < n; i++)
+    {
+        count=count_1(arr[i], m);
+        if (max < count)
+        {
+            max=count;
+            returnval=i;
+        }
+    }
+    return returnval;
+}
+
+};
