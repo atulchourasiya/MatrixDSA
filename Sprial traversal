@@ -1,0 +1,58 @@
+int* spirallyTraverse(int r, int c, int matrix[][c])
+{  
+   int *arr=(int*)malloc((r*c)*sizeof(int));
+   int index=0;
+   int start_row=0;
+   int end_row=c-1;
+   int start_col=0;
+   int end_col=r-1;
+   int dir=0;
+
+   while(start_row<=end_col&&start_col<=end_row)
+   {
+   if(dir==0)
+   {
+   for(int i=start_col;i<=end_row;i++)
+   {
+       arr[index]=matrix[start_col][i];
+       index++;
+   }
+   
+   start_row++;
+   dir=1;
+   } 
+   else if(dir==1) 
+   {
+   for (int i = start_row; i <= end_col; i++)
+   {
+       arr[index]=matrix[i][end_row];
+       index++;
+   }
+   
+   end_row--;
+   dir=2;
+   }
+   else if(dir==2)
+   {
+   for (int i = end_row; i >= start_col; i--)
+   {
+       arr[index]=matrix[end_col][i];
+       index++;
+   }
+   
+   end_col--;
+   dir=3;
+   }
+   else if(dir==3)
+   {
+   for (int i = end_col; i >= start_row; i--)
+   {
+       arr[index]=matrix[i][start_col];
+       index++;
+   }
+   start_col++;
+   dir=0;
+   }
+   }
+   return arr;
+}
